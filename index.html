@@ -10,27 +10,46 @@
 
 
     <!-- FORMULARIO -->
-
-    <form>
+    <form class="JVform">
 
 
       <div class="block-input">
-        <label for="nombre">Jhosua</label>
-        <input type="text" name="nombre" id="nombre" data-validation="text">
+        <label for="nombre">Nombre</label>
+        <div class="JVform__ctn-input">
+          <input type="text" name="nombre" id="nombre" data-validation="text" data-error="Ingrese el nombre">
+        </div>
       </div>
       <!-- APELLIDO -->
       <div class="block-input">
-        <label for="apellido">Penagos</label>
-        <input type="text" name="apellido" id="apellido" data-validation="text">
+        <label for="apellido">Apellido</label>
+        <div class="JVform__ctn-input">
+          <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
+        </div>
       </div>
       <!-- APELLIDO -->
       <div class="block-input">
-        <label for="apellido">Penagos</label>
-        <input type="text" name="apellido" id="apellido" data-validation="number">
+        <label for="telefono">Télefono</label>
+        <div class="JVform__ctn-input">
+          <input type="number" name="telefono" id="telefono" data-validation="number">
+        </div>
+      </div>
+      <!-- APELLIDO -->
+      <div class="block-input">
+        <label for="email">Email</label>
+        <div class="JVform__ctn-input">
+          <input type="email" name="email" id="email" data-validation="email">
+        </div>
+      </div>
+
+      <div class="block-input">
+        <label for="mensaje">Mensaje</label>
+        <div class="JVform__ctn-input">
+          <textarea name="mensaje" id="mensaje" data-validation="message"></textarea>
+        </div>
       </div>
 
 
-      <div class="block-input">
+      <div class="block-input submit">
         <button type="submit">Enviar</button>
       </div>
 
@@ -38,6 +57,6 @@
 
 
     <div id="app"></div>
-    <script type="module" src="/js/front.js"></script>
+    <script type="module" src="./sources/js/front.js"></script>
   </body>
 </html>

@@ -1,0 +1,38 @@
+@use '../config/variables' as var;
+
+.JVform{
+    &__ctn-input{
+        position: relative;
+    }
+    &__error-message{
+        position: absolute;
+        right: 0;
+        background-color: var.$danger;
+        padding: .5rem;
+        bottom: 100%;
+        border-radius: .5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s ease opacity;
+        &.active{
+            opacity: 1;
+        }
+        &::before{
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: .5rem solid transparent;
+            border-right: .35rem solid var.$danger;
+            border-bottom: .35rem solid var.$danger;
+            border-top: .5rem solid transparent;
+            position: absolute;
+            bottom: -2px;
+            right: 5px;
+            transform: rotate(45deg);
+        }
+        p{
+            font-size: 1.1rem;
+            color: var.$white;
+        }
+    }
+}

@@ -25,12 +25,28 @@ const JVform = (()=>{
             'message': 'message'
         }
     }
+    //CREAMOS PLANTILLA DEL MENSAJE DE ERROR
+    const createTemplateError = (cls)=>{
+        cls.forEach((data)=>{
+            const createDivForTemplate = document.createElement('div');
+            createDivForTemplate.classList.add('JVform__error-message');
+            const getAtrError = data.dataset.error;
+            const getName = data.name;
+            let templateMessage;
+            getAtrError ? templateMessage = `<p>${getAtrError}</p>` : templateMessage = `<p>Ingrese ${getName}</p>`;
+            createDivForTemplate.innerHTML = templateMessage;
+            data.parentNode.append(createDivForTemplate);
+        });
+    }
 
     const ConfigJVform = ()=>{
         
         //VARIABLES GENERALES
         const getEventSubmit = document.querySelector('form');
         const getAllInputs = document.querySelectorAll('form input');
+
+        //CREACIÓN MENSAJE DE ERROR LLAMANDO A LA FUNCIÓN CREADA PARA ELLO
+        createTemplateError(getAllInputs);
 
         //CREAMOS UNA VALIDACION QUE SE USARA EN LOS DIFERENTES EVENTOS DEL FORM
         const reUseValidation = ()=>{
@@ -43,7 +59,7 @@ const JVform = (()=>{
                 const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
                 //VALIDAMOS EL TIPO DE ATRIUBTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                 const getParent = data.parentNode;
-                if(returnTypeValidation == 'number'){
+                if(returnTypeValidation == 'text'){
                     if(text.test(data.value)){
                         getParent.classList.add('validateVF');
                     }else{
@@ -69,7 +85,14 @@ const JVform = (()=>{
             if(getAllInputs.length == getAllClsValidate.length){
                 console.log('enviado');
             }else{
-                console.log('no enviado');
+                getAllInputs.forEach((data)=>{
+                    const getParentVal = data.parentNode;
+                    if(getParentVal.classList.contains('validateVF')){
+                        getParentVal.querySelector('.JVform__error-message').classList.remove('active');
+                    }else{
+                        getParentVal.querySelector('.JVform__error-message').classList.add('active');
+                    }
+                });
             }
 
         });
