@@ -4,6 +4,34 @@
     &__ctn-input{
         position: relative;
     }
+    .validateVF{
+        .JVform__error-message{
+            opacity: 0;
+        }
+    }
+    &__error-send{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        p{
+            background-color: var.$danger;
+            width: fit-content;
+            padding: 8px 20px;
+            border-radius: 5px;
+            margin: auto;
+            margin-top: 10px;
+            position: absolute;
+            font-size: 1.6rem;
+            color: var.$white;
+            opacity: 0;
+            pointer-events: none;
+        }
+        &.active{
+            p{
+                opacity: 1;
+            }
+        }
+    }
     &__error-message{
         position: absolute;
         right: 0;

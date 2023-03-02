@@ -27,6 +27,19 @@ body{
             display: flex;
             justify-content: center;
         }
+        &.w100{
+            width: 100%;
+            flex: 1 100%;
+        }
+        .flex{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .fit-content{
+            width: fit-content;
+        }
     }
 }
 
@@ -54,6 +67,58 @@ body{
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button{
             appearance: none;
+        }
+    }
+    input[type="checkbox"]{
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 1.5px solid var.$white;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &::before{
+            position: absolute;
+            content: "✓";
+            font-size: 1.3rem;
+            color: var.$white;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s ease opacity;
+        }
+        &:checked{
+            &::before{
+                opacity: 1;
+            }
+        }
+    }
+    input[type="radio"]{
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 100px;
+        border: 1.5px solid var.$white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .3s ease background-color;
+        &::before{
+            position: absolute;
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 100px;
+            background-color: var.$secondary-color;
+            opacity: 0;
+            transition: .3s ease opacity;
+        }
+        &:checked{
+            background-color: var.$white;
+            &::before{
+                opacity: 1;
+            }
         }
     }
     textarea{

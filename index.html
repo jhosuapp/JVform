@@ -8,39 +8,52 @@
   </head>
   <body>
 
-
     <!-- FORMULARIO -->
-    <form class="JVform">
+    <form class="JVform" id="primerFormulario">
 
 
       <div class="block-input">
-        <label for="nombre">Nombre</label>
+        <label for="nombre">Nombre *</label>
         <div class="JVform__ctn-input">
           <input type="text" name="nombre" id="nombre" data-validation="text" data-error="Ingrese el nombre">
         </div>
       </div>
       <!-- APELLIDO -->
       <div class="block-input">
-        <label for="apellido">Apellido</label>
+        <label for="apellido">Apellido *</label>
         <div class="JVform__ctn-input">
           <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
         </div>
       </div>
       <!-- APELLIDO -->
       <div class="block-input">
-        <label for="telefono">Télefono</label>
+        <label for="telefono">Télefono *</label>
         <div class="JVform__ctn-input">
-          <input type="number" name="telefono" id="telefono" data-validation="number">
+          <input type="number" name="telefono" id="telefono" data-validation="phone">
         </div>
       </div>
       <!-- APELLIDO -->
       <div class="block-input">
-        <label for="email">Email</label>
+        <label for="email">Email *</label>
         <div class="JVform__ctn-input">
           <input type="email" name="email" id="email" data-validation="email">
         </div>
       </div>
-
+      <!-- RADIO -->
+      <div class="block-input">
+        <label>Género *</label>
+        <div class="JVform__ctn-input fit-content flex">
+          <label for="masculino" class="flex">
+            <input type="radio" name="genero" id="masculino">
+            <span>Masculino</span>
+          </label>
+          <label for="femenino" class="flex">
+            <input type="radio" name="genero" id="femenino">
+            <span>Femenino</span>
+          </label>
+        </div>
+      </div>
+      <!--MENSAJE-->
       <div class="block-input">
         <label for="mensaje">Mensaje</label>
         <div class="JVform__ctn-input">
@@ -48,9 +61,22 @@
         </div>
       </div>
 
+      <!--CHEKBOX-->
+      <div class="block-input w100">
+        <div class="JVform__ctn-input flex fit-content">
+          <input type="checkbox" id="terminos" name="terminos" data-error="acepte los terminos">
+          <label for="terminos">Al hacer click acepta los terminos y condiciones</label>
+        </div>
+      </div>
 
       <div class="block-input submit">
         <button type="submit">Enviar</button>
+      </div>
+
+      <div class="block-input w100">
+        <div class="JVform__error-send">
+          <p>Uno o más campos tienen error, corrijalos e intente de nuevo</p>
+        </div>
       </div>
 
     </form>
