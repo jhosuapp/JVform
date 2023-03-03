@@ -3,4 +3,4 @@ import "../sass/main.scss";
 
 window.addEventListener('load', ()=>{
     JVform('#primerFormulario');
-})
+});

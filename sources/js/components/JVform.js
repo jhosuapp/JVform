@@ -25,14 +25,20 @@ export const JVform = (clsForm)=>{
     //CREAMOS PLANTILLA DEL MENSAJE DE ERROR
     const createTemplateError = (cls)=>{
         cls.forEach((data)=>{
-            const createDivForTemplate = document.createElement('div');
-            createDivForTemplate.classList.add('JVform__error-message');
-            const getAtrError = data.dataset.error;
-            const getName = data.name;
-            let templateMessage;
-            getAtrError ? templateMessage = `<p>${getAtrError}</p>` : templateMessage = `<p>Ingrese ${getName}</p>`;
-            createDivForTemplate.innerHTML = templateMessage;
-            data.parentNode.append(createDivForTemplate);
+            const getAtrMandatory = data.dataset.mandatory;
+            if(getAtrMandatory == "false"){
+                const getParent = data.closest('.JVform__ctn-input');
+                getParent && getParent.classList.add('validateVF');
+            }else{
+                const createDivForTemplate = document.createElement('div');
+                createDivForTemplate.classList.add('JVform__error-message');
+                const getAtrError = data.dataset.error;
+                const getName = data.name;
+                let templateMessage;
+                getAtrError ? templateMessage = `<p>${getAtrError}</p>` : templateMessage = `<p>Ingrese ${getName}</p>`;
+                createDivForTemplate.innerHTML = templateMessage;
+                data.parentNode.append(createDivForTemplate);
+            }
         });
     }
     //CONFIGURACION GENERAL DEL FORMULARIO
@@ -43,8 +49,8 @@ export const JVform = (clsForm)=>{
         const getAllInputs = document.querySelectorAll(`${clsForm} input`);
         const getAllTextareas = document.querySelectorAll(`${clsForm} textarea`);
 
-        //CREACIÓN MENSAJE DE ERROR LLAMANDO A LA FUNCIÓN CREADA PARA ELLO
-        createTemplateError(getAllInputs);
+        //CREACIÓN MENSAJE DE ERROR Y LLAMANDO A LA FUNCIÓN CREADA PARA ELLO
+        createTemplateError(getAllInputs);                
         createTemplateError(getAllTextareas);
 
         //-------------------- VALIDACIÓN GENERAL --------------------//
@@ -57,10 +63,8 @@ export const JVform = (clsForm)=>{
                 const getAtrTypeValidation = data.dataset.validation;
                 const getObjWithTypeValidations = ObjWithTypeValidations();
                 const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
-                //VALIDAMOS EL TIPO DE ATRIUBTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
-
                 const getParent = data.closest('.JVform__ctn-input');
-
+                //CREAMOS FUNCION PARA VALIDAR EL TIPO DE ATRIBUTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                 const reUseClsValidation = (typeValidation, exp)=>{
                     if(returnTypeValidation == typeValidation){
                         if(exp.test(data.value)){
@@ -110,13 +114,57 @@ export const JVform = (clsForm)=>{
         });
         //---------------- FIN VALIDACIÓN PARA CHECKBOX ----------//
 
+        //---------------- VALIDACIÓN PARA ARCHIVOS -------------//
+        getAllInputs && getAllInputs.forEach((data)=>{
+            if(data.type == 'file'){
+                data.addEventListener('change', ()=>{
+                    const getSizeFile = data.files[0].size;
+                    const getNameFile = data.files[0].name;
+                    const getAtrLimitSize = parseInt(data.dataset.filesize);
+                    const getAtrAllowdedDocs = data.dataset.fileallowed;
+                    const getParentFile = data.closest('.JVform__ctn-input');
+                    const nameFileToArr = getNameFile.split('.');
+                    const getExtensionOfArr = nameFileToArr[nameFileToArr.length - 1].toLowerCase();
+
+                    //VALIDACIÓN PARA CUANDO HAY UN LIMITE DE EXTENSIONES
+                    if(getAtrAllowdedDocs){
+                        const allowerdDocsToArr = getAtrAllowdedDocs.split(',');
+                        if(allowerdDocsToArr.includes(getExtensionOfArr)){
+                            getParentFile.classList.add('validateVF');
+                        }else{
+                            getParentFile.classList.remove('validateVF');
+                        }
+                    }
+                    //VALIDACION PARA CUANDO HAY UN LIMITE DE PESO
+                    if(getAtrLimitSize){
+                        if(getSizeFile < getAtrLimitSize){
+                            getParentFile.classList.add('validateVF');
+                        }else{
+                            getParentFile.classList.remove('validateVF');
+                        }
+                    }
+                    //VALIDACION PARA CUANDO HAY LIMITE DE PESO Y EXTENSIONES
+                    if(getAtrAllowdedDocs && getAtrLimitSize){
+                        const allowerdDocsToArrTwo = getAtrAllowdedDocs.split(',');
+                        if(allowerdDocsToArrTwo.includes(getExtensionOfArr) && getSizeFile < getAtrLimitSize){
+                            getParentFile.classList.add('validateVF');
+                        }else{
+                            getParentFile.classList.remove('validateVF');
+                        }
+                    }
+                });
+            }
+        });
+
+        //---------------- FIN VALIDACIÓN PARA ARCHIVOS ---------//
+
         //---------------- EJECUCIÓN DE EVENTOS -----------------//
         //EJECUCION DE LA VALIDACIÓN GENERAL
         getAllInputs && getAllInputs.forEach((data)=>{
             data.addEventListener('keyup', reUseValidation);
             data.addEventListener('blur', reUseValidation);
         });
-        //EJECICIÓN VALIDACIÓN TEXTAREA
+        //EJECUCIÓN VALIDACIÓN TEXTAREA
         getAllTextareas && getAllTextareas.forEach((data)=>{
             data.addEventListener('keyup', reUseValidationTextArea);
             data.addEventListener('blur', reUseValidationTextArea);
@@ -135,24 +183,25 @@ export const JVform = (clsForm)=>{
             const reUseAssignementCls = (clsValidation)=>{
                 clsValidation.forEach((data)=>{
                     const getParentVal = data.parentNode;
+                    const getMessageErrorQuery =  getParentVal.querySelector('.JVform__error-message');
                     if(getParentVal.classList.contains('validateVF')){
-                        getParentVal.querySelector('.JVform__error-message').classList.remove('active');
+                        getMessageErrorQuery && getMessageErrorQuery.classList.remove('active');
                     }else{
-                        getParentVal.querySelector('.JVform__error-message').classList.add('active');
+                        getMessageErrorQuery && getMessageErrorQuery.classList.add('active');
                     }
                 });
             }
             console.log(getAllClsInputCtn.length, getAllClsValidate.length);
             if(getAllClsInputCtn.length == getAllClsValidate.length){
                 console.log('enviado');
-                getMessageError.classList.remove('active');
+                getMessageError && getMessageError.classList.remove('active');
             }else{
                 //MENSAJE DE ERROR PARA INPUTS
                 reUseAssignementCls(getAllInputs);
                 //MENSAJE DE ERROR PARA TEXTAREAS
                 reUseAssignementCls(getAllTextareas);
                 //MENSAJE DE ERROR GENERAL
-                getMessageError.classList.add('active');
+                getMessageError && getMessageError.classList.add('active');
             }
 
         });

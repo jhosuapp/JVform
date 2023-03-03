@@ -8,31 +8,45 @@
   </head>
   <body>
 
-    <!-- FORMULARIO -->
+    <!-- TEXT -->
     <form class="JVform" id="primerFormulario">
 
 
       <div class="block-input">
         <label for="nombre">Nombre *</label>
         <div class="JVform__ctn-input">
-          <input type="text" name="nombre" id="nombre" data-validation="text" data-error="Ingrese el nombre">
+          <input type="text" name="nombre" id="nombre" data-validation="text" data-error="Ingrese un nombre valido">
         </div>
       </div>
-      <!-- APELLIDO -->
+      <!-- TEXT -->
       <div class="block-input">
         <label for="apellido">Apellido *</label>
         <div class="JVform__ctn-input">
           <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
         </div>
       </div>
-      <!-- APELLIDO -->
+      <!-- TEXT NO OBLIGATORIO -->
+      <div class="block-input">
+        <label for="numeroI">Número de identificación</label>
+        <div class="JVform__ctn-input">
+          <input type="text" name="numeroI" id="numeroI" data-mandatory="false">
+        </div>
+      </div>
+      <!-- TEXT -->
+      <div class="block-input">
+        <label for="tipoDocumento">Tipo Documento</label>
+        <div class="JVform__ctn-input">
+          <input type="text" name="tipoDocumento" id="tipoDocumento" data-mandatory="false">
+        </div>
+      </div>
+      <!-- NUMBER -->
       <div class="block-input">
         <label for="telefono">Télefono *</label>
         <div class="JVform__ctn-input">
           <input type="number" name="telefono" id="telefono" data-validation="phone">
         </div>
       </div>
-      <!-- APELLIDO -->
+      <!-- EMAIL -->
       <div class="block-input">
         <label for="email">Email *</label>
         <div class="JVform__ctn-input">
@@ -53,7 +67,47 @@
           </label>
         </div>
       </div>
-      <!--MENSAJE-->
+      <!-- FILE -->
+      <div class="block-input">
+        <label for="archivo">Archivo con validación para tamaño</label>
+        <div class="JVform__ctn-input fit-content flex">
+          <input 
+            type="file" 
+            name="archivo" 
+            id="archivo" 
+            data-filesize="1000000" 
+            data-error="Ingrese un archivo menor a 1MB" 
+          />
+        </div>
+      </div>
+      <!-- FILE -->
+      <div class="block-input">
+        <label for="tarea">Archivo con validación para extensiones</label>
+        <div class="JVform__ctn-input fit-content flex">
+          <input 
+            type="file" 
+            name="tarea" 
+            id="tarea" 
+            data-fileallowed="jpg,pdf,png" 
+            data-error="Ingrese el archivo en formato pdf, png o jpg" 
+          />
+        </div>
+      </div>
+      <!-- FILE -->
+      <div class="block-input">
+        <label for="tarea">Archivo con validación para extensiones y tamaño</label>
+        <div class="JVform__ctn-input fit-content flex">
+          <input 
+            type="file" 
+            name="tarea" 
+            id="tarea" 
+            data-fileallowed="jpg,pdf,png" 
+            data-filesize="1000000" 
+            data-error="Ingrese el archivo en formato pdf, png o jpg y con un peso máximo de 1MB" 
+          />
+        </div>
+      </div>
+      <!--TEXTAREA-->
       <div class="block-input">
         <label for="mensaje">Mensaje</label>
         <div class="JVform__ctn-input">
