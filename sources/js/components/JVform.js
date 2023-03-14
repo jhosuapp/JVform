@@ -1,4 +1,4 @@
-export const JVform = (clsForm)=>{
+export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
     //CREAMOS VALIDACIONES CON EXPRESIONES REGULARES
     const RegularExpresions = ()=>{
         return {
@@ -174,8 +174,6 @@ export const JVform = (clsForm)=>{
         //---------------- ENVÍO DEL FORMULARIO --------------------//
         //VALIDACION DE CONDICIONES EN SUBMIT Y ENVIO DEL FORM
         getEventSubmit.addEventListener('submit', (e)=>{
-            e.preventDefault();
-
             const getAllClsValidate = document.querySelectorAll(`${clsForm} .validateVF`);
             const getAllClsInputCtn = document.querySelectorAll(`${clsForm} .JVform__ctn-input`);
             const getMessageError = document.querySelector(`${clsForm} .JVform__error-send`);
@@ -193,7 +191,12 @@ export const JVform = (clsForm)=>{
             }
             console.log(getAllClsInputCtn.length, getAllClsValidate.length);
             if(getAllClsInputCtn.length == getAllClsValidate.length){
-                console.log('enviado');
+
+                preventSubmit == true || preventSubmit == 'true' && e.preventDefault();
+
+                //EVENTO SUBMIT PARA ENVÍO DEL FORM AL BACKEND
+                functionSubmit();
+
                 getMessageError && getMessageError.classList.remove('active');
             }else{
                 //MENSAJE DE ERROR PARA INPUTS
@@ -202,6 +205,8 @@ export const JVform = (clsForm)=>{
                 reUseAssignementCls(getAllTextareas);
                 //MENSAJE DE ERROR GENERAL
                 getMessageError && getMessageError.classList.add('active');
+                //SE PREVIENE EL EVENTO DEL SUBMIT
+                e.preventDefault();
             }
 
         });
