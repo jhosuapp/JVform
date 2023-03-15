@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JVform</title>
+    <script type="module" crossorigin src="/JVform/assets/index.600898aa.js"></script>
+    <link rel="stylesheet" href="/JVform/assets/index.86d4e388.css">
+  </head>
+  <body> 
+
+    <div class="ctn home-ctn">
+      <div class="ctm-block ctm-block--center home-title">
+        <h1>JVform, librería para validar tus formularios</h1>
+        <h4>Versión 1.0</h4>
+        <h4>Desarrollado por: Jehosua Penagos</h4>
+      </div>
+      <!-- TEXT -->
+      <form class="JVform" id="primerFormulario">
+
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular de texto</h4>
+          </div>
+          <label for="nombre">Nombre *</label>
+          <div class="JVform__ctn-input">
+            <input type="text" name="nombre" id="nombre" data-validation="text" data-error="Ingrese un nombre valido">
+          </div>
+        </div>
+        <!-- TEXT -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular de texto</h4>
+          </div>
+          <label for="apellido">Apellido *</label>
+          <div class="JVform__ctn-input">
+            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
+          </div>
+        </div>
+        <!-- TEXT NO OBLIGATORIO -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo para número + no es obligatorio</h4>
+          </div>
+          <label for="numeroI">Número de identificación</label>
+          <div class="JVform__ctn-input">
+            <input type="text" name="numeroI" id="numeroI" data-mandatory="false">
+          </div>
+        </div>
+        <!-- TEXT -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo para número + no es obligatorio</h4>
+          </div>
+          <label for="tipoDocumento">Tipo Documento</label>
+          <div class="JVform__ctn-input">
+            <input type="text" name="tipoDocumento" id="tipoDocumento" data-mandatory="false">
+          </div>
+        </div>
+        <!-- NUMBER -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + expresión regular de télefono</h4>
+          </div>
+          <label for="telefono">Télefono *</label>
+          <div class="JVform__ctn-input">
+            <input type="number" name="telefono" id="telefono" data-validation="phone">
+          </div>
+        </div>
+        <!-- EMAIL -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + expresión regular de email</h4>
+          </div>
+          <label for="email">Email *</label>
+          <div class="JVform__ctn-input">
+            <input type="email" name="email" id="email" data-validation="email">
+          </div>
+        </div>
+        <!-- RADIO -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Validación para radios</h4>
+          </div>
+          <label>Género *</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <label for="masculino" class="flex">
+              <input type="radio" name="genero" id="masculino">
+              <span>Masculino</span>
+            </label>
+            <label for="femenino" class="flex">
+              <input type="radio" name="genero" id="femenino">
+              <span>Femenino</span>
+            </label>
+          </div>
+        </div>
+        <!-- FILE -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + condición de tamaño de 1MB</h4>
+          </div>
+          <label for="archivo">Archivo con validación para tamaño</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <input 
+              type="file" 
+              name="archivo" 
+              id="archivo" 
+              data-filesize="1000000" 
+              data-error="Ingrese un archivo menor a 1MB" 
+            />
+          </div>
+        </div>
+        <!-- FILE -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + condición para extensiones</h4>
+          </div>
+          <label for="tarea">Archivo con validación para extensiones</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <input 
+              type="file" 
+              name="tarea" 
+              id="tarea" 
+              data-fileallowed="jpg,pdf,png" 
+              data-error="Ingrese el archivo en formato pdf, png o jpg" 
+            />
+          </div>
+        </div>
+        <!-- FILE -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + condición de tamaño + condición de extensiones</h4>
+          </div>
+          <label for="tarea">Archivo con validación para extensiones y tamaño</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <input 
+              type="file" 
+              name="tarea" 
+              id="tarea" 
+              data-fileallowed="jpg,pdf,png" 
+              data-filesize="1000000" 
+              data-error="Ingrese el archivo en formato pdf, png o jpg y con un peso máximo de 1MB" 
+            />
+          </div>
+        </div>
+        <!--TEXTAREA-->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + validación con expresión regular de mensaje</h4>
+          </div>
+          <label for="mensaje">Mensaje</label>
+          <div class="JVform__ctn-input">
+            <textarea name="mensaje" id="mensaje" data-validation="message"></textarea>
+          </div>
+        </div>
+
+        <!--CHEKBOX-->
+        <div class="block-input w100">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + validación para checkbox</h4>
+          </div>
+          <div class="JVform__ctn-input flex fit-content">
+            <input type="checkbox" id="terminos" name="terminos" data-error="acepte los terminos">
+            <label for="terminos">Al hacer click acepta los terminos y condiciones</label>
+          </div>
+        </div>
+
+        <!--CHEKBOX-->
+        <div class="block-input w100">
+          <div class="ctm-block">
+            <h4>No es obligatorio + validación para checkbox</h4>
+          </div>
+          <div class="JVform__ctn-input flex fit-content">
+            <input type="checkbox" id="guardarDatos" name="guardarDatos" data-mandatory="false">
+            <label for="guardarDatos">Guardar mis datos</label>
+          </div>
+        </div>
+
+        <div class="block-input submit noBorder">
+          <button type="submit">Suscribirse</button>
+        </div>
+
+        <div class="block-input w100 noBorder">
+          <div class="JVform__error-send">
+            <p>Uno o más campos tienen error, corrijalos e intente de nuevo</p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    
+  </body>
+</html>
