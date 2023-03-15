@@ -1,6 +1,17 @@
 //COLORS
-$primary-color: rgb(27, 36, 77);
+$primary-color: #4e42d4;
 $secondary-color: rgb(2, 156, 222);
+$tertiary-color: rgb(129, 129, 129);
+$cuartary-color: rgb(158, 155, 155);
 $white: #fff;
 $black: #000;
-$danger: rgb(201, 48, 48);
+$danger: rgb(201, 68, 68);
+//BREAKPOINTS
+$breakpoints: (
+    'desktop': 1440px,
+    'laptop': 1280px,
+    'laptop-small': 1100px,
+    'ipad-big': 992px,
+    'ipad-small': 768px,
+    'mobile': 576px
+);

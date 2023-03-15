@@ -1,0 +1,9 @@
+@use './variables' as var;
+//COLORS
+@function color($name){
+    @return map-get($map: var.$palette, $key: $name);
+}
+//BREAKPOINTS
+@function breakpoints($name){
+    @return map-get($map: var.$breakpoints, $key: $name);
+}

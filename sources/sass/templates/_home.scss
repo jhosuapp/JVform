@@ -1,0 +1,47 @@
+@use '../config/variables' as var;
+
+.home-title{
+    padding: 4rem 0;
+}
+
+.home-ctn{
+    padding-bottom: 6rem;
+    form{
+        h4{
+            margin-bottom: 10px;
+        }
+    }
+    .JVform{
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        .block-input{
+            border-bottom: 2px solid var.$cuartary-color;
+            padding: 0 20px 40px 20px;
+            margin-bottom: 20px;
+            &.noBorder{
+                border: none;
+                padding-bottom: 0;
+            }
+            &.submit{
+                width: 100%;
+                flex: 1 100%;
+                display: flex;
+                justify-content: center;
+            }
+            &.w100{
+                width: 100%;
+                flex: 1 100%;
+            }
+            .flex{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+            .fit-content{
+                width: fit-content;
+            }
+        }
+    }
+}

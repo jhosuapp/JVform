@@ -1,0 +1,85 @@
+@use '../config/variables' as var;
+@use '../config/functions' as fun;
+
+.ctm-block{
+    h1,h2,h3,h4,h5,h6{
+        font-weight: 800;
+    }
+    h1, h2{
+        font-weight: 800;
+    }
+    h1{
+        font-size: 4rem;
+    }
+    h2{
+        font-size: 3.4rem;
+    }
+    h3{
+        font-size: 2.4rem;
+    }
+    h4{
+        font-size: 1.8rem;
+    }
+    h5{
+        font-size: 1.6rem;
+    }
+    h6{
+        font-size: 1.2rem;
+    }
+    p{
+        font-size: 1.6rem;
+    }
+    h1, h2, h3, h4, h5, h6, p, li{
+        color: var.$primary-color;
+    }
+    legend{
+        font-size: 2.2rem;
+    }
+    .size18{
+        font-size: 1.8rem;
+    }
+    &-white{
+        h1, h2, h3, h4, h5, p{
+            color: var.$white;
+        }
+    }
+    ul li,
+    ol li{
+        font-size: 1.5rem;
+    }
+    ol li{
+        margin-left: 17.5px;
+        &::marker{
+            position: relative;
+        }
+    }
+    &--center{
+        text-align: center;
+    }
+}
+
+@media(max-width: fun.breakpoints('ipad-big')){
+    .ctm-block{
+        h1{
+            font-size: 2.8rem;
+        }
+        h2{
+            font-size: 2.4rem;
+        }
+        h3{
+            font-size: 2rem;
+        }
+        h4{
+            font-size: 1.7rem;
+        }
+        h5{
+            font-size: 1.8rem;
+        }
+        p{
+            font-size: 1.6rem;
+        }
+        legend{
+            font-size: 2rem;
+        }
+    }
+}

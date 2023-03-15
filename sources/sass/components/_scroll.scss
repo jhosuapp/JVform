@@ -1,0 +1,30 @@
+@use '../config/variables' as var;
+
+body{
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    
+    &::-webkit-scrollbar:vertical {
+        width:18px;
+    }
+    
+    &::-webkit-scrollbar-button:increment,&::-webkit-scrollbar-button {
+        display: none;
+    } 
+    
+    &::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: var.$primary-color;
+        border-radius: 20px;
+        border: 5px solid var.$white;
+    }
+    
+    &::-webkit-scrollbar-track {
+        border-radius: 10px; 
+    }
+
+}

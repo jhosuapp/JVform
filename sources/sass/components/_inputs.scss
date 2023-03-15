@@ -1,52 +1,8 @@
 @use '../config/variables' as var;
 
-
-body{
-    background-color: var.$primary-color;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
-}
-
-.JVform{
-    width: 90%;
-    max-width: 1080px;
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 60px 0;
-    .block-input{
-        flex: 1 500px;
-        &.submit{
-            width: 100%;
-            flex: 1 100%;
-            display: flex;
-            justify-content: center;
-        }
-        &.w100{
-            width: 100%;
-            flex: 1 100%;
-        }
-        .flex{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-        .fit-content{
-            width: fit-content;
-        }
-    }
-}
-
 .JVform{
     label{
-        color: var.$white;
+        color: var.$tertiary-color;
         font-size: 1.5rem;
     }
     input[type="text"],
@@ -55,12 +11,12 @@ body{
     textarea{
         margin-top: .5rem;
         border: none;
-        border: 1.5px solid var.$white;
+        border: 1.5px solid var.$tertiary-color;
         outline: inherit;
         background-color: transparent;
         padding: 1rem 1.5rem;
         border-radius: .5rem;
-        color: var.$white;
+        color: var.$tertiary-color;
         font-size: 1.4rem;
         width: 100%;
     }
@@ -74,7 +30,7 @@ body{
         appearance: none;
         width: 20px;
         height: 20px;
-        border: 1.5px solid var.$white;
+        border: 1.5px solid var.$tertiary-color;
         border-radius: 5px;
         position: relative;
         display: flex;
@@ -84,7 +40,7 @@ body{
             position: absolute;
             content: "✓";
             font-size: 1.3rem;
-            color: var.$white;
+            color: var.$tertiary-color;
             opacity: 0;
             pointer-events: none;
             transition: .3s ease opacity;
@@ -100,7 +56,7 @@ body{
         width: 18px;
         height: 18px;
         border-radius: 100px;
-        border: 1.5px solid var.$white;
+        border: 1.5px solid var.$tertiary-color;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -111,12 +67,12 @@ body{
             width: 7px;
             height: 7px;
             border-radius: 100px;
-            background-color: var.$secondary-color;
+            background-color: var.$primary-color;
             opacity: 0;
             transition: .3s ease opacity;
         }
         &:checked{
-            background-color: var.$white;
+            background-color: var.$tertiary-color;
             &::before{
                 opacity: 1;
             }
@@ -128,17 +84,22 @@ body{
     }
     button[type="submit"],
     input[type="submit"]{
-        background-color: var.$secondary-color;
+        background-color: var.$primary-color;
         border: none;
         outline: inherit;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px 20px;
+        padding: 12.5px 20px;
         color: var.$white;
         font-size: 1.6rem;
         border-radius: 5px;
         cursor: pointer;
-        text-transform: uppercase;
+        min-width: 125px;
+        font-size: 1.8rem;
+        transition: .3s ease background-color;
+        &:hover{
+            background-color: var.$secondary-color;
+        }
     }
 }
