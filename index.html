@@ -5,15 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JVform</title>
-    <script type="module" crossorigin src="/JVform/assets/index.600898aa.js"></script>
-    <link rel="stylesheet" href="/JVform/assets/index.86d4e388.css">
+    <script type="module" crossorigin src="/JVform/assets/index.7173657d.js"></script>
+    <link rel="stylesheet" href="/JVform/assets/index.595532b9.css">
   </head>
   <body> 
 
     <div class="ctn home-ctn">
       <div class="ctm-block ctm-block--center home-title">
         <h1>JVform, librería para validar tus formularios</h1>
-        <h4>Versión 1.0</h4>
+        <h4>Versión 1.0.1</h4>
         <h4>Desarrollado por: Jehosua Penagos</h4>
       </div>
       <!-- TEXT -->
@@ -31,11 +31,11 @@
         <!-- TEXT -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Campo obligatorio + texto de error personalizado + expresión regular de texto</h4>
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular personalizada</h4>
           </div>
           <label for="apellido">Apellido *</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
+            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido" data-expresion="^[a-zA-ZÀ-ÿ\s]{4,40}$">
           </div>
         </div>
         <!-- TEXT NO OBLIGATORIO -->
@@ -51,11 +51,11 @@
         <!-- TEXT -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Campo para número + no es obligatorio</h4>
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular para URL</h4>
           </div>
-          <label for="tipoDocumento">Tipo Documento</label>
+          <label for="urlDocumento">Url de perfil</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="tipoDocumento" id="tipoDocumento" data-mandatory="false">
+            <input type="text" name="urlDocumento" id="urlDocumento" data-validation="url" data-error="Ingrese una URL valida">
           </div>
         </div>
         <!-- NUMBER -->
@@ -81,7 +81,24 @@
         <!-- RADIO -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Validación para radios</h4>
+            <h4>Campo no obligatorio</h4>
+          </div>
+          <label>Es obligatorio</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <label for="si" class="flex">
+              <input type="radio" name="radioObligatorio" id="si" data-mandatory="false">
+              <span>si</span>
+            </label>
+            <label for="no" class="flex">
+              <input type="radio" name="radioObligatorio" id="no" data-mandatory="false">
+              <span>no</span>
+            </label>
+          </div>
+        </div>
+        <!-- RADIO -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio para radio</h4>
           </div>
           <label>Género *</label>
           <div class="JVform__ctn-input fit-content flex">
@@ -169,7 +186,7 @@
         <!--CHEKBOX-->
         <div class="block-input w100">
           <div class="ctm-block">
-            <h4>No es obligatorio + validación para checkbox</h4>
+            <h4>Campo no obligatorio para checkbox</h4>
           </div>
           <div class="JVform__ctn-input flex fit-content">
             <input type="checkbox" id="guardarDatos" name="guardarDatos" data-mandatory="false">
