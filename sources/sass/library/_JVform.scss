@@ -64,3 +64,21 @@
         }
     }
 }
+
+@keyframes error-message {
+    from{
+        transform: rotate(5deg);
+    }
+    25%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    75%{
+        transform: rotate(-5deg);
+    }
+    to{
+        transform: rotate(0deg);
+    }
+}

@@ -27,6 +27,7 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         cls.forEach((data)=>{
             const getAtrMandatory = data.dataset.mandatory;
             if(getAtrMandatory == "false"){
+                console.log(data);
                 const getParent = data.closest('.JVform__ctn-input');
                 getParent && getParent.classList.add('validateVF');
             }else{
@@ -104,11 +105,14 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             
         //---------------- VALIDACIÓN PARA CHECKBOX ---------------//
         getAllInputs && getAllInputs.forEach((data)=>{
+            const getDataMandatory = data.dataset.mandatory;
             if(data.type == 'checkbox' || data.type == 'radio'){
                 data.addEventListener('change', ()=>{
-                    data.checked ? 
-                    data.closest('.JVform__ctn-input').classList.add('validateVF') : 
-                    data.closest('.JVform__ctn-input').classList.remove('validateVF');
+                    if(getDataMandatory != "false"){
+                        data.checked ? 
+                        data.closest('.JVform__ctn-input').classList.add('validateVF') : 
+                        data.closest('.JVform__ctn-input').classList.remove('validateVF');
+                    }
                 });
             }
         });
@@ -205,6 +209,12 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 reUseAssignementCls(getAllTextareas);
                 //MENSAJE DE ERROR GENERAL
                 getMessageError && getMessageError.classList.add('active');
+                if(getMessageError.classList.contains('active')){
+                    getMessageError.style.animation = "error-message .5s 1 ease";
+                    setTimeout(()=>{
+                        getMessageError.style.animation = "nothing";
+                    },500);
+                }
                 //SE PREVIENE EL EVENTO DEL SUBMIT
                 e.preventDefault();
             }
