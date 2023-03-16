@@ -29,11 +29,11 @@
         <!-- TEXT -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Campo obligatorio + texto de error personalizado + expresión regular de texto</h4>
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular personalizada</h4>
           </div>
           <label for="apellido">Apellido *</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido">
+            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido" data-expresion="^[a-zA-ZÀ-ÿ\s]{4,40}$">
           </div>
         </div>
         <!-- TEXT NO OBLIGATORIO -->
@@ -51,9 +51,9 @@
           <div class="ctm-block">
             <h4>Campo para número + no es obligatorio</h4>
           </div>
-          <label for="tipoDocumento">Tipo Documento</label>
+          <label for="urlDocumento">Url de perfil</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="tipoDocumento" id="tipoDocumento" data-mandatory="false">
+            <input type="text" name="urlDocumento" id="urlDocumento" data-validation="url" data-error="Ingrese una URL valida">
           </div>
         </div>
         <!-- NUMBER -->

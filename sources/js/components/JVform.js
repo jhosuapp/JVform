@@ -7,7 +7,8 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             phone: /^(\+)?[\d\s\-\.]{5,30}$/,
             email: /^[\w\d\.\-]+@+[\w\d]+\.+[\w\d\.]+$/,
             password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-            message: /.{10,200}/
+            message: /.{10,200}/,
+            url: /[a-zA-Z0-9_.+-]{0,3}\.[a-zA-Z0-9-]{0,100}\.[a-zA-Z0-9-.]+$/,
         }
     }
     //CREAMOS OBJETO CON LOS TIPOS DE DATA ATRIBUTOS DE LOS INPUTS
@@ -19,7 +20,8 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             'phone': 'phone',
             'email': 'email',
             'password': 'password',
-            'message': 'message'
+            'message': 'message',
+            'url': 'url',
         }
     }
     //CREAMOS PLANTILLA DEL MENSAJE DE ERROR
@@ -27,7 +29,6 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         cls.forEach((data)=>{
             const getAtrMandatory = data.dataset.mandatory;
             if(getAtrMandatory == "false"){
-                console.log(data);
                 const getParent = data.closest('.JVform__ctn-input');
                 getParent && getParent.classList.add('validateVF');
             }else{
@@ -58,22 +59,28 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         //CREAMOS UNA VALIDACION QUE SE USARA EN LOS DIFERENTES EVENTOS DEL FORM
         const reUseValidation = ()=>{
             //DESESTRUCTURAMOS EL OBJETO CON LAS EXPRESIONES REGULARES
-            const { user, text, phone, email, password } = RegularExpresions();
+            const { user, text, phone, email, password, url } = RegularExpresions();
             getAllInputs && getAllInputs.forEach((data)=>{
                 //OBTENEMOS LOS ATRIBUTOS DEL INPUT 
                 const getAtrTypeValidation = data.dataset.validation;
                 const getObjWithTypeValidations = ObjWithTypeValidations();
                 const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
                 const getParent = data.closest('.JVform__ctn-input');
+                const getAtrExpresion = data.dataset.expresion;
+                const atrExpresionTransform = new RegExp(getAtrExpresion);
                 //CREAMOS FUNCION PARA VALIDAR EL TIPO DE ATRIBUTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                 const reUseClsValidation = (typeValidation, exp)=>{
-                    if(returnTypeValidation == typeValidation){
+                    if(getAtrExpresion){
                         if(exp.test(data.value)){
                             getParent.classList.add('validateVF');
                         }else{
                             getParent.classList.remove('validateVF');
                         }
-                    }   
+                    }else{
+                        if(returnTypeValidation == typeValidation){
+                            exp.test(data.value) ? getParent.classList.add('validateVF') : getParent.classList.remove('validateVF');
+                        }   
+                    }
                 } 
                 //VALIDACION PARA INPUT TEXT
                 reUseClsValidation('text', text);
@@ -81,8 +88,10 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 reUseClsValidation('phone', phone);
                 //VALIDACION PARA CORREO
                 reUseClsValidation('email', email);
-                //VALIDACION PARA CORREO
-                reUseClsValidation('email', email);
+                //VALIDACION PARA url
+                reUseClsValidation('url', url);
+                //VALIDACION PARA EXPRESIONES PERSONALIZADAS
+                reUseClsValidation('personality', atrExpresionTransform);
 
             });
         }
