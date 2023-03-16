@@ -49,7 +49,7 @@
         <!-- TEXT -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Campo para número + no es obligatorio</h4>
+            <h4>Campo obligatorio + texto de error personalizado + expresión regular para URL</h4>
           </div>
           <label for="urlDocumento">Url de perfil</label>
           <div class="JVform__ctn-input">
@@ -79,7 +79,24 @@
         <!-- RADIO -->
         <div class="block-input">
           <div class="ctm-block">
-            <h4>Validación para radios</h4>
+            <h4>Campo no obligatorio</h4>
+          </div>
+          <label>Es obligatorio</label>
+          <div class="JVform__ctn-input fit-content flex">
+            <label for="si" class="flex">
+              <input type="radio" name="radioObligatorio" id="si" data-mandatory="false">
+              <span>si</span>
+            </label>
+            <label for="no" class="flex">
+              <input type="radio" name="radioObligatorio" id="no" data-mandatory="false">
+              <span>no</span>
+            </label>
+          </div>
+        </div>
+        <!-- RADIO -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio para radio</h4>
           </div>
           <label>Género *</label>
           <div class="JVform__ctn-input fit-content flex">
@@ -167,7 +184,7 @@
         <!--CHEKBOX-->
         <div class="block-input w100">
           <div class="ctm-block">
-            <h4>No es obligatorio</h4>
+            <h4>Campo no obligatorio para checkbox</h4>
           </div>
           <div class="JVform__ctn-input flex fit-content">
             <input type="checkbox" id="guardarDatos" name="guardarDatos" data-mandatory="false">

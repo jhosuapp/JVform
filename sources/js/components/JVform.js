@@ -73,12 +73,18 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                     if(getAtrExpresion){
                         if(exp.test(data.value)){
                             getParent.classList.add('validateVF');
+                            getParent.classList.remove('errorValidateVF');
                         }else{
                             getParent.classList.remove('validateVF');
                         }
                     }else{
                         if(returnTypeValidation == typeValidation){
-                            exp.test(data.value) ? getParent.classList.add('validateVF') : getParent.classList.remove('validateVF');
+                            if(exp.test(data.value)){
+                                getParent.classList.add('validateVF');
+                                getParent.classList.remove('errorValidateVF');
+                            }else{ 
+                                getParent.classList.remove('validateVF');
+                            }
                         }   
                     }
                 } 
@@ -97,6 +103,13 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         }
         //----------------FIN VALIDACIÓN GENERAL --------------------//
 
+        //------- MENSAJES DE ERROR PARA INPUTS FOCUSEADOS ---------//
+        const reUseValidationMsg = (clsMsg)=>{
+            const getParentDataMsg = clsMsg.closest('.JVform__ctn-input');
+            getParentDataMsg.classList.contains('validateVF') ? getParentDataMsg.classList.remove('errorValidateVF') : getParentDataMsg.classList.add('errorValidateVF');
+        }
+        //----- FIN MENSAJES DE ERROR PARA INPUTS FOCUSEADOS -------//
+
         //------------ VALIDACIÓN PARA TEXTAREA --------------------//
         const reUseValidationTextArea = ()=>{
             //DESESTRUCTURAMOS MENSAJE
@@ -105,6 +118,7 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 const getParentTextarea = data.closest('.JVform__ctn-input');
                 if(message.test(data.value)){
                     getParentTextarea.classList.add('validateVF');
+                    getParentTextarea.classList.remove('errorValidateVF');
                 }else{
                     getParentTextarea.classList.remove('validateVF');
                 }
@@ -117,10 +131,9 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             const getDataMandatory = data.dataset.mandatory;
             if(data.type == 'checkbox' || data.type == 'radio'){
                 data.addEventListener('change', ()=>{
+                    const getParentRadio = data.closest('.JVform__ctn-input');
                     if(getDataMandatory != "false"){
-                        data.checked ? 
-                        data.closest('.JVform__ctn-input').classList.add('validateVF') : 
-                        data.closest('.JVform__ctn-input').classList.remove('validateVF');
+                        data.checked ? getParentRadio.classList.add('validateVF') : getParentRadio.classList.remove('validateVF');
                     }
                 });
             }
@@ -176,11 +189,20 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         getAllInputs && getAllInputs.forEach((data)=>{
             data.addEventListener('keyup', reUseValidation);
             data.addEventListener('blur', reUseValidation);
+            data.addEventListener('blur', ()=>{
+                reUseValidationMsg(data);
+            });
+            data.addEventListener('change', ()=>{
+                reUseValidationMsg(data);
+            });
         });
         //EJECUCIÓN VALIDACIÓN TEXTAREA
         getAllTextareas && getAllTextareas.forEach((data)=>{
             data.addEventListener('keyup', reUseValidationTextArea);
             data.addEventListener('blur', reUseValidationTextArea);
+            data.addEventListener('blur', ()=>{
+                reUseValidationMsg(data);
+            });
         });
         //---------------- FIN EJECUCIÓN DE EVENTOS -----------------//
 
@@ -193,12 +215,11 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             //FUNCIÓN PARA AÑADIR Y QUITAR CLASE QUE VALIDA
             const reUseAssignementCls = (clsValidation)=>{
                 clsValidation.forEach((data)=>{
-                    const getParentVal = data.parentNode;
-                    const getMessageErrorQuery =  getParentVal.querySelector('.JVform__error-message');
+                    const getParentVal = data.closest('.JVform__ctn-input');
                     if(getParentVal.classList.contains('validateVF')){
-                        getMessageErrorQuery && getMessageErrorQuery.classList.remove('active');
+                        getParentVal && getParentVal.classList.remove('errorValidateVF');
                     }else{
-                        getMessageErrorQuery && getMessageErrorQuery.classList.add('active');
+                        getParentVal && getParentVal.classList.add('errorValidateVF');
                     }
                 });
             }
