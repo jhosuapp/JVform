@@ -1,48 +1,15 @@
-export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
-    //CREAMOS VALIDACIONES CON EXPRESIONES REGULARES
-    const RegularExpresions = ()=>{
-        return {
-            user: /^[a-zA-ZÀ-ÿ\s\.-_@]{3,40}/,
-            text: /^[a-zA-ZÀ-ÿ\s]{3,40}$/,
-            phone: /^(\+)?[\d\s\-\.]{5,30}$/,
-            email: /^[\w\d\.\-]+@+[\w\d]+\.+[\w\d\.]+$/,
-            password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-            message: /.{10,200}/,
-            url: /[a-zA-Z0-9_.+-]{0,3}\.[a-zA-Z0-9-]{0,100}\.[a-zA-Z0-9-.]+$/,
-        }
-    }
-    //CREAMOS OBJETO CON LOS TIPOS DE DATA ATRIBUTOS DE LOS INPUTS
-    const ObjWithTypeValidations = ()=>{
-        return {
-            'text': 'text',
-            'number': 'number',
-            'user': 'user',
-            'phone': 'phone',
-            'email': 'email',
-            'password': 'password',
-            'message': 'message',
-            'url': 'url',
-        }
-    }
-    //CREAMOS PLANTILLA DEL MENSAJE DE ERROR
-    const createTemplateError = (cls)=>{
-        cls.forEach((data)=>{
-            const getAtrMandatory = data.dataset.mandatory;
-            if(getAtrMandatory == "false"){
-                const getParent = data.closest('.JVform__ctn-input');
-                getParent && getParent.classList.add('validateVF');
-            }else{
-                const createDivForTemplate = document.createElement('div');
-                createDivForTemplate.classList.add('JVform__error-message');
-                const getAtrError = data.dataset.error;
-                const getName = data.name;
-                let templateMessage;
-                getAtrError ? templateMessage = `<p>${getAtrError}</p>` : templateMessage = `<p>Ingrese ${getName}</p>`;
-                createDivForTemplate.innerHTML = templateMessage;
-                data.parentNode.append(createDivForTemplate);
-            }
-        });
-    }
+//IMPORTAMOS LAS EXPRESIONES Y LOS TIPOS DE VALIDACIONES
+import { ObjRegularExpresions, ObjWithTypeValidations } from './JVobjects';
+//IMPORTAMOS PLANTILLA PARA MENSAJES DE ERROR
+import { createTemplateError } from './JVtemplateError';
+
+const JVform = (clsForm, preventSubmit, functionSubmit)=>{
+
+    //OBJETO DE EXPRESIONES REGULARES
+    ObjRegularExpresions();
+    //OBJETO DE TIPOS DE VALIDACIONES
+    ObjWithTypeValidations();
+
     //CONFIGURACION GENERAL DEL FORMULARIO
     const ConfigJVform = ()=>{
         
@@ -61,7 +28,7 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         //CREAMOS UNA VALIDACION QUE SE USARA EN LOS DIFERENTES EVENTOS DEL FORM
         const reUseValidation = ()=>{
             //DESESTRUCTURAMOS EL OBJETO CON LAS EXPRESIONES REGULARES
-            const { user, text, phone, email, password, url } = RegularExpresions();
+            const { user, text, phone, email, password, url } = ObjRegularExpresions();
             getAllInputs && getAllInputs.forEach((data)=>{
                 //OBTENEMOS LOS ATRIBUTOS DEL INPUT 
                 const getAtrTypeValidation = data.dataset.validation;
@@ -115,7 +82,7 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         //------------ VALIDACIÓN PARA TEXTAREA --------------------//
         const reUseValidationTextArea = ()=>{
             //DESESTRUCTURAMOS MENSAJE
-            const { message } = RegularExpresions();
+            const { message } = ObjRegularExpresions();
             getAllTextareas && getAllTextareas.forEach((data)=>{
                 const getParentTextarea = data.closest('.JVform__ctn-input');
                 if(message.test(data.value)){
@@ -252,7 +219,6 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 });
             }
             console.log(getAllClsInputCtn.length, getAllClsValidate.length);
-            console.log(preventSubmit);
             if(getAllClsInputCtn.length == getAllClsValidate.length){
 
                 preventSubmit == true && e.preventDefault();
@@ -285,3 +251,5 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
 
     return ConfigJVform();
 }
+
+export { JVform }
