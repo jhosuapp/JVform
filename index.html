@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JVform</title>
-    <script type="module" crossorigin src="/JVform/assets/index.7173657d.js"></script>
-    <link rel="stylesheet" href="/JVform/assets/index.595532b9.css">
+    <script type="module" crossorigin src="/JVform/assets/index.aabc3a12.js"></script>
+    <link rel="stylesheet" href="/JVform/assets/index.7de97d24.css">
   </head>
   <body> 
 
@@ -171,11 +171,39 @@
             <textarea name="mensaje" id="mensaje" data-validation="message"></textarea>
           </div>
         </div>
+        <!--SELECT-->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + validación de select</h4>
+          </div>
+          <label for="select">Seleccione una opción</label>
+          <div class="JVform__ctn-input">
+            <select name="select" id="select" data-error="Seleccione una opción">
+              <option value="Seleccione">Seleccione</option>
+              <option value="OpcionUno">Opción uno</option>
+              <option value="OpcionDos">Opción dos</option>
+            </select>
+          </div>
+        </div>
+        <!--SELECT-->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo no obligatorio</h4>
+          </div>
+          <label for="selectDos">Seleccione una opción</label>
+          <div class="JVform__ctn-input">
+            <select name="selectDos" id="selectDos" data-error="Seleccione una opción" data-mandatory="false">
+              <option value="Seleccione">Seleccione</option>
+              <option value="OpcionUno">Opción uno</option>
+              <option value="OpcionDos">Opción dos</option>
+            </select>
+          </div>
+        </div>
 
         <!--CHEKBOX-->
         <div class="block-input w100">
           <div class="ctm-block">
-            <h4>Campo obligatorio + validación para checkbox a</h4>
+            <h4>Campo obligatorio + validación para checkbox</h4>
           </div>
           <div class="JVform__ctn-input flex fit-content">
             <input type="checkbox" id="terminos" name="terminos" data-error="acepte los terminos">
@@ -190,7 +218,7 @@
           </div>
           <div class="JVform__ctn-input flex fit-content">
             <input type="checkbox" id="guardarDatos" name="guardarDatos" data-mandatory="false">
-            <label for="guardarDatos">Guardar mis datos</label>
+            <label for="guardarDatos">Guardar mis datos personales</label>
           </div>
         </div>
 
