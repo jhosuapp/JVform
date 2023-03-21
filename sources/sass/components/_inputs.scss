@@ -8,7 +8,8 @@
     input[type="text"],
     input[type="email"],
     input[type="number"],
-    textarea{
+    textarea,
+    select{
         margin-top: .5rem;
         border: none;
         border: 1.5px solid var.$tertiary-color;

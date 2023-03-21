@@ -11,7 +11,7 @@ const funcAlert = ()=>{
 
 window.addEventListener('load', ()=>{
     JVform(
-        '#primerFormulario', //ID O CLASE DEL FORMULARIO
+        '#primerFormulario', //ID, ETIQUETA O CLASE DEL FORMULARIO
         true, //INDICACIÓN SI CUANDO TODOS LOS DATOS ESTÁN BIEN AÚN ASÍ SE MANTIENE EL PREVENTDEFAULT
         funcAlert //FUNCIÓN QUE SE EJECUTA CUANDO TODOS LOS DATOS ESTÁN BIEN
     );

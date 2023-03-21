@@ -50,10 +50,12 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
         const getEventSubmit = document.querySelector(`${clsForm}`);
         const getAllInputs = document.querySelectorAll(`${clsForm} input`);
         const getAllTextareas = document.querySelectorAll(`${clsForm} textarea`);
+        const getAllSelects = document.querySelectorAll(`${clsForm} select`);
 
         //CREACIÓN MENSAJE DE ERROR Y LLAMANDO A LA FUNCIÓN CREADA PARA ELLO
         createTemplateError(getAllInputs);                
         createTemplateError(getAllTextareas);
+        createTemplateError(getAllSelects);
 
         //-------------------- VALIDACIÓN GENERAL --------------------//
         //CREAMOS UNA VALIDACION QUE SE USARA EN LOS DIFERENTES EVENTOS DEL FORM
@@ -181,8 +183,34 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 });
             }
         });
-
         //---------------- FIN VALIDACIÓN PARA ARCHIVOS ---------//
+
+        //---------------- VALIDACIÓN PARA SELECTS ---------------//
+
+        getAllSelects && getAllSelects.forEach((data)=>{
+            const getDataMandatorySelect = data.dataset.mandatory;
+            const getParentSelect = data.closest('.JVform__ctn-input');
+            //COMPROBAMOS SI ES OBLIGATORIO
+            if(getDataMandatorySelect == 'false' || getDataMandatorySelect == false){
+                getParentSelect.classList.add('validateVF');
+            }else{
+                data.addEventListener('change', ()=>{
+                    const getFirtsChild = data.firstElementChild.value;
+                    const getValueSelect = data.value;
+                    //VALIDAMOS QUE NO VUELVA A SELECCIONAR LA OPCIÓN POR DEFECTO
+                    if(getFirtsChild.toLowerCase() == getValueSelect.toLowerCase()){
+                        getParentSelect.classList.remove('validateVF');
+                        getParentSelect.classList.add('errorValidateVF');
+                    }else{
+                        getParentSelect.classList.add('validateVF');
+                        getParentSelect.classList.remove('errorValidateVF');
+                    }
+                });
+            }
+
+        });
+
+        //---------------- FIN VALIDACIÓN PARA SELECTS -----------//
 
         //---------------- EJECUCIÓN DE EVENTOS -----------------//
         //EJECUCION DE LA VALIDACIÓN GENERAL
@@ -224,10 +252,10 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 });
             }
             console.log(getAllClsInputCtn.length, getAllClsValidate.length);
+            console.log(preventSubmit);
             if(getAllClsInputCtn.length == getAllClsValidate.length){
 
-                preventSubmit == true || preventSubmit == 'true' && e.preventDefault();
-
+                preventSubmit == true && e.preventDefault();
                 //EVENTO SUBMIT PARA ENVÍO DEL FORM AL BACKEND
                 functionSubmit();
 
@@ -237,6 +265,8 @@ export const JVform = (clsForm, preventSubmit, functionSubmit)=>{
                 reUseAssignementCls(getAllInputs);
                 //MENSAJE DE ERROR PARA TEXTAREAS
                 reUseAssignementCls(getAllTextareas);
+                //MENSAJE DE ERROR PARA SELECTS
+                reUseAssignementCls(getAllSelects);
                 //MENSAJE DE ERROR GENERAL
                 getMessageError && getMessageError.classList.add('active');
                 if(getMessageError.classList.contains('active')){
