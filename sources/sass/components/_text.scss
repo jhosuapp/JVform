@@ -29,23 +29,40 @@
     p{
         font-size: 1.6rem;
     }
+    b{
+        font-weight: 800;
+    }
     h1, h2, h3, h4, h5, h6, p, li{
         color: var.$primary-color;
-    }
-    legend{
-        font-size: 2.2rem;
-    }
-    .size18{
-        font-size: 1.8rem;
     }
     &-white{
         h1, h2, h3, h4, h5, p{
             color: var.$white;
         }
     }
+    &-gray{
+        h1, h2, h3, h4, h5, p, code, span, li{
+            color: var.$text-color;
+        }
+    }
+    &-center{
+        text-align: center;
+    }
+    &-code{
+        code{
+            color: var.$white;
+            background-color: var.$text-color;
+            padding: 3px;
+            border-radius: 5px;
+        }
+    }
     ul li,
     ol li{
         font-size: 1.5rem;
+        margin-bottom: .5rem;
+    }
+    ul, ol{
+        margin-left: 2.5rem;
     }
     ol li{
         margin-left: 17.5px;
@@ -53,9 +70,7 @@
             position: relative;
         }
     }
-    &--center{
-        text-align: center;
-    }
+
 }
 
 @media(max-width: fun.breakpoints('ipad-big')){
