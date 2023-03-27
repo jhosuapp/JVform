@@ -3,8 +3,10 @@ import { ObjRegularExpresions, ObjWithTypeValidations } from './JVobjects';
 //IMPORTAMOS PLANTILLA PARA MENSAJES DE ERROR
 import { createTemplateError } from './JVtemplateError';
 
-const JVform = (clsForm, preventSubmit, functionSubmit)=>{
+function JVform(clsForm, principalMethod){
 
+    //DEFINIMOS EL METODO PRINCIPAL DE LA FUNCIÓN
+    this.principalMethod = principalMethod;
     //OBJETO DE EXPRESIONES REGULARES
     ObjRegularExpresions();
     //OBJETO DE TIPOS DE VALIDACIONES
@@ -220,10 +222,10 @@ const JVform = (clsForm, preventSubmit, functionSubmit)=>{
             }
             console.log(getAllClsInputCtn.length, getAllClsValidate.length);
             if(getAllClsInputCtn.length == getAllClsValidate.length){
-
-                preventSubmit == true && e.preventDefault();
+                //VALIDAMOS SI INSETAMOS PREVENT DEFAULT DEPENDIENDO EL PARAMETRO RECIBIDO
+                principalMethod.preventSubmit == true && e.preventDefault();
                 //EVENTO SUBMIT PARA ENVÍO DEL FORM AL BACKEND
-                functionSubmit();
+                principalMethod.sendFunction && principalMethod.sendFunction();
 
                 getMessageError && getMessageError.classList.remove('active');
             }else{
