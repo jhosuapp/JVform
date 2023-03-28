@@ -130,14 +130,17 @@ function JVform(clsForm, principalMethod){
         getAllInputs && getAllInputs.forEach((data)=>{
             if(data.type == 'file'){
                 data.addEventListener('change', ()=>{
-                    const getSizeFile = data.files[0].size;
-                    const getNameFile = data.files[0].name;
-                    const getAtrLimitSize = parseInt(data.dataset.filesize);
-                    const getAtrAllowdedDocs = data.dataset.fileallowed;
-                    const getParentFile = data.closest('.JVform__ctn-input');
-                    const nameFileToArr = getNameFile.split('.');
-                    const getExtensionOfArr = nameFileToArr[nameFileToArr.length - 1].toLowerCase();
-
+                    let getSizeFile, getNameFile, getAtrLimitSize, getAtrAllowdedDocs, getParentFile, nameFileToArr, getExtensionOfArr;
+                    //VALIDAMOS QUE EL ARCHIVO SI EXISTA PARA EVITAR ERRORES DE CONSOLA
+                    if(data.files[0]){
+                        getSizeFile = data.files[0].size;
+                        getNameFile = data.files[0].name;
+                        getAtrLimitSize = parseInt(data.dataset.filesize);
+                        getAtrAllowdedDocs = data.dataset.fileallowed;
+                        getParentFile = data.closest('.JVform__ctn-input');
+                        nameFileToArr = getNameFile.split('.');
+                        getExtensionOfArr = nameFileToArr[nameFileToArr.length - 1].toLowerCase();
+                    }
                     //VALIDACIÓN PARA CUANDO HAY UN LIMITE DE EXTENSIONES
                     if(getAtrAllowdedDocs){
                         const allowerdDocsToArr = getAtrAllowdedDocs.split(',');
