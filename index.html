@@ -33,7 +33,7 @@
           </div>
           <label for="apellido">Apellido *</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="apellido" id="apellido" data-validation="text" data-error="Ingrese el apellido" data-expresion="^[a-zA-ZÀ-ÿ\s]{4,40}$">
+            <input type="text" name="apellido" id="apellido" data-error="Ingrese el apellido" data-expresion="^[a-zA-ZÀ-ÿ\s]{4,40}$">
           </div>
         </div>
         <!-- TEXT NO OBLIGATORIO -->
@@ -43,7 +43,7 @@
           </div>
           <label for="numeroI">Número de identificación</label>
           <div class="JVform__ctn-input">
-            <input type="text" name="numeroI" id="numeroI" data-mandatory="false">
+            <input type="text" name="numeroI" id="numeroI" data-mandatory="false" data-validation="phone">
           </div>
         </div>
         <!-- TEXT -->
@@ -166,27 +166,7 @@
           </div>
           <label for="mensaje">Mensaje</label>
           <div class="JVform__ctn-input">
-            <textarea name="mensaje" id="mensaje" data-validation="message"></textarea>
-          </div>
-        </div>
-        <!--TEXTAREA-->
-        <div class="block-input">
-          <div class="ctm-block">
-            <h4>Campo obligatorio + validación con expresión regular de mensaje</h4>
-          </div>
-          <label for="mensajeTwo">mensajeTwo</label>
-          <div class="JVform__ctn-input">
-            <textarea name="mensajeTwo" id="mensajeTwo" data-expresion=".{2,200}"></textarea>
-          </div>
-        </div>
-        <!--TEXTAREA-->
-        <div class="block-input">
-          <div class="ctm-block">
-            <h4>Campo obligatorio + validación con expresión regular de mensaje</h4>
-          </div>
-          <label for="mensajeThree">mensajeThree</label>
-          <div class="JVform__ctn-input">
-            <textarea name="mensajeThree" id="mensajeThree" data-mandatory="false"></textarea>
+            <textarea name="mensaje" id="mensaje"></textarea>
           </div>
         </div>
         <!--SELECT-->

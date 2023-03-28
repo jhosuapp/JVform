@@ -38,25 +38,26 @@ function JVform(clsForm, principalMethod){
                 const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
                 const getParent = data.closest('.JVform__ctn-input');
                 const getAtrExpresion = data.dataset.expresion;
+                const getAtrMandatory = data.dataset.mandatory;
                 const atrExpresionTransform = new RegExp(getAtrExpresion);
                 //CREAMOS FUNCION PARA VALIDAR EL TIPO DE ATRIBUTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                 const reUseClsValidation = (typeValidation, exp)=>{
-                    if(getAtrExpresion){
-                        if(exp.test(data.value)){
-                            getParent.classList.add('validateVF');
-                            getParent.classList.remove('errorValidateVF');
-                        }else{
-                            getParent.classList.remove('validateVF');
-                        }
-                    }else{
-                        if(returnTypeValidation == typeValidation){
+                    if(getAtrMandatory != "false"){
+                        if(getAtrExpresion){
+                            if(exp.test(data.value)){
+                                getParent.classList.add('validateVF');
+                                getParent.classList.remove('errorValidateVF');
+                            }else{
+                                getParent.classList.remove('validateVF');
+                            }
+                        }else if(returnTypeValidation == typeValidation){
                             if(exp.test(data.value)){
                                 getParent.classList.add('validateVF');
                                 getParent.classList.remove('errorValidateVF');
                             }else{ 
                                 getParent.classList.remove('validateVF');
                             }
-                        }   
+                        }
                     }
                 } 
                 //VALIDACION PARA INPUT TEXT
@@ -86,22 +87,25 @@ function JVform(clsForm, principalMethod){
             //DESESTRUCTURAMOS MENSAJE
             const { message } = ObjRegularExpresions();
             getAllTextareas && getAllTextareas.forEach((data)=>{
-                const getAtrExpresionsMsg = data.getAttribute('data-expresion');
+                const getAtrExpresionsMsg = data.dataset.expresion;
+                const getAtrMandatoryMsg = data.dataset.mandatory;
                 const getParentTextarea = data.closest('.JVform__ctn-input');
                 const atrExpresionTransformMsg = new RegExp(getAtrExpresionsMsg);
-                if(getAtrExpresionsMsg){
-                    if(atrExpresionTransformMsg.test(data.value)){
-                        getParentTextarea.classList.add('validateVF');
-                        getParentTextarea.classList.remove('errorValidateVF');
+                if(getAtrMandatoryMsg != "false"){
+                    if(getAtrExpresionsMsg){
+                        if(atrExpresionTransformMsg.test(data.value)){
+                            getParentTextarea.classList.add('validateVF');
+                            getParentTextarea.classList.remove('errorValidateVF');
+                        }else{
+                            getParentTextarea.classList.remove('validateVF');
+                        }
                     }else{
-                        getParentTextarea.classList.remove('validateVF');
-                    }
-                }else{
-                    if(message.test(data.value)){
-                        getParentTextarea.classList.add('validateVF');
-                        getParentTextarea.classList.remove('errorValidateVF');
-                    }else{
-                        getParentTextarea.classList.remove('validateVF');
+                        if(message.test(data.value)){
+                            getParentTextarea.classList.add('validateVF');
+                            getParentTextarea.classList.remove('errorValidateVF');
+                        }else{
+                            getParentTextarea.classList.remove('validateVF');
+                        }
                     }
                 }
             });
