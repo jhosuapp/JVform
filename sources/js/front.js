@@ -12,5 +12,6 @@ window.addEventListener('load', ()=>{
     const miFirtsForm = new JVform('#primerFormulario',{
         preventSubmit: true, //DEJAMOS EL PREVENT DEFAULT ASÍ EL FORMULARIO SEA ENVIADO
         sendFunction: funcAlert, //FUNCIÓN QUE SE EJECUTA CUANDO SE HACE EL ENVÍO DEL FORMULARIO
+        messageError: true, //FUNCIÓN QUE SE EJECUTA CUANDO SE HACE EL ENVÍO DEL FORMULARIO
     });
 });

@@ -236,7 +236,7 @@ function JVform(clsForm, principalMethod){
                 //EVENTO SUBMIT PARA ENVÍO DEL FORM AL BACKEND
                 principalMethod.sendFunction && principalMethod.sendFunction();
 
-                getMessageError && getMessageError.classList.remove('active');
+                principalMethod.messageError && getMessageError.classList.remove('active');
             }else{
                 //MENSAJE DE ERROR PARA INPUTS
                 reUseAssignementCls(getAllInputs);
@@ -245,8 +245,8 @@ function JVform(clsForm, principalMethod){
                 //MENSAJE DE ERROR PARA SELECTS
                 reUseAssignementCls(getAllSelects);
                 //MENSAJE DE ERROR GENERAL
-                getMessageError && getMessageError.classList.add('active');
-                if(getMessageError.classList.contains('active')){
+                principalMethod.messageError && getMessageError.classList.add('active');
+                if(principalMethod.messageError && getMessageError.classList.contains('active')){
                     getMessageError.style.animation = "error-message .5s 1 ease";
                     setTimeout(()=>{
                         getMessageError.style.animation = "nothing";
