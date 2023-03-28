@@ -34,16 +34,16 @@ function JVform(clsForm, principalMethod){
             getAllInputs && getAllInputs.forEach((data)=>{
                 //OBTENEMOS LOS ATRIBUTOS DEL INPUT 
                 const getAtrTypeValidation = data.dataset.validation;
+                const getAtrExpresion = data.dataset.expresion;
+                const getAtrMandatory = data.dataset.mandatory;
                 const getObjWithTypeValidations = ObjWithTypeValidations();
                 const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
                 const getParent = data.closest('.JVform__ctn-input');
-                const getAtrExpresion = data.dataset.expresion;
-                const getAtrMandatory = data.dataset.mandatory;
                 const atrExpresionTransform = new RegExp(getAtrExpresion);
                 //CREAMOS FUNCION PARA VALIDAR EL TIPO DE ATRIBUTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                 const reUseClsValidation = (typeValidation, exp)=>{
                     if(getAtrExpresion && getAtrMandatory != "false"){
-                        if(exp.test(data.value)){
+                        if(atrExpresionTransform.test(data.value)){
                             getParent.classList.add('validateVF');
                             getParent.classList.remove('errorValidateVF');
                         }else{
@@ -66,9 +66,6 @@ function JVform(clsForm, principalMethod){
                 reUseClsValidation('email', email);
                 //VALIDACION PARA url
                 reUseClsValidation('url', url);
-                //VALIDACION PARA EXPRESIONES PERSONALIZADAS
-                reUseClsValidation('personality', atrExpresionTransform);
-
             });
         }
         //----------------FIN VALIDACIÓN GENERAL --------------------//
