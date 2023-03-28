@@ -86,12 +86,23 @@ function JVform(clsForm, principalMethod){
             //DESESTRUCTURAMOS MENSAJE
             const { message } = ObjRegularExpresions();
             getAllTextareas && getAllTextareas.forEach((data)=>{
+                const getAtrExpresionsMsg = data.getAttribute('data-expresion');
                 const getParentTextarea = data.closest('.JVform__ctn-input');
-                if(message.test(data.value)){
-                    getParentTextarea.classList.add('validateVF');
-                    getParentTextarea.classList.remove('errorValidateVF');
+                const atrExpresionTransformMsg = new RegExp(getAtrExpresionsMsg);
+                if(getAtrExpresionsMsg){
+                    if(atrExpresionTransformMsg.test(data.value)){
+                        getParentTextarea.classList.add('validateVF');
+                        getParentTextarea.classList.remove('errorValidateVF');
+                    }else{
+                        getParentTextarea.classList.remove('validateVF');
+                    }
                 }else{
-                    getParentTextarea.classList.remove('validateVF');
+                    if(message.test(data.value)){
+                        getParentTextarea.classList.add('validateVF');
+                        getParentTextarea.classList.remove('errorValidateVF');
+                    }else{
+                        getParentTextarea.classList.remove('validateVF');
+                    }
                 }
             });
         }
