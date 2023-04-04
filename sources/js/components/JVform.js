@@ -2,6 +2,8 @@
 import { ObjRegularExpresions, ObjWithTypeValidations } from './JVobjects';
 //IMPORTAMOS PLANTILLA PARA MENSAJES DE ERROR
 import { createTemplateError } from './JVtemplateError';
+//IMPORTAMOS GENERADOR DE CONTRASEÑAS
+import { generatePassword } from './JVformgenpass';
 
 function JVform(clsForm, principalMethod){
 
