@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JVform</title>
-    <script type="module" crossorigin src="/JVform/assets/index.4b06abfe.js"></script>
-    <link rel="stylesheet" href="/JVform/assets/index.e6618988.css">
+    <script type="module" crossorigin src="/JVform/assets/index.68bfa359.js"></script>
+    <link rel="stylesheet" href="/JVform/assets/index.c47f8f7c.css">
   </head>
   <body> 
 
@@ -76,6 +76,26 @@
           <label for="email">Email *</label>
           <div class="JVform__ctn-input">
             <input type="email" name="email" id="email" data-validation="email">
+          </div>
+        </div>
+        <!-- CONFIRMAR CONTRASEÑA -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + expresión regular de password y confirmación de contraseña</h4>
+          </div>
+          <label for="contraseña">Contraseña *</label>
+          <div class="JVform__ctn-input" style="margin-bottom:20px">
+            <input type="password" name="contraseña" id="contraseña" data-validation="password" data-error="Ingrese mínimo 1 minúscula, 1 mayúscula, 1 número, 1 caracters especial y sin espacios">
+            <p class="showHiddenPass">MOSTRAR/OCULTAR</p>
+            <a class="ctm-block btn" id="generatePass">
+              <p style="margin-top:10px">Generar contraseña segura</p>
+            </a>
+          </div>
+          <!-- GENERADOR DE CONTRASEÑAS -->
+          <label for="confirmarContraseña">Confirmar contraseña *</label>
+          <div class="JVform__ctn-input">
+            <input type="password" name="confirmarContraseña" id="confirmarContraseña" data-error="Las contraseñas no coinciden" data-confirmpass="true" data-match="#contraseña">
+            <p class="showHiddenPass">MOSTRAR/OCULTAR</p>
           </div>
         </div>
         <!-- RADIO -->
@@ -149,12 +169,12 @@
           <div class="ctm-block">
             <h4>Campo obligatorio + condición de tamaño + condición de extensiones</h4>
           </div>
-          <label for="tarea">Archivo con validación para extensiones y tamaño</label>
+          <label for="tareaDos">Archivo con validación para extensiones y tamaño</label>
           <div class="JVform__ctn-input fit-content flex">
             <input 
               type="file" 
-              name="tarea" 
-              id="tarea" 
+              name="tareaDos" 
+              id="tareaDos" 
               data-fileallowed="jpg,pdf,png" 
               data-filesize="1000000" 
               data-error="Ingrese el archivo en formato pdf, png o jpg y con un peso máximo de 1MB" 
