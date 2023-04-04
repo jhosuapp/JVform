@@ -166,7 +166,7 @@ function JVform(clsForm, principalMethod){
         getAllInputs && getAllInputs.forEach((data)=>{
             const getAtrConfirmPass = data.dataset.confirmpass;
             if(data.type == "password" && getAtrConfirmPass){
-                data.addEventListener('keyup', ()=>{
+                const reUseValidationPass = ()=>{
                     const getValueConfirmPass = data.value;
                     const getAtrMatch = data.dataset.match;
                     const getInputPass = document.querySelector(`${getAtrMatch}`).value;
@@ -178,10 +178,46 @@ function JVform(clsForm, principalMethod){
                         getParentPass.classList.remove('validateVF');
                         getParentPass.classList.add('errorValidateVF');
                     }
-                });
+                }
+                data.addEventListener('keyup', reUseValidationPass);
+                data.addEventListener('focus', reUseValidationPass);
+                data.addEventListener('blur', reUseValidationPass);
             }
         });
         //------------- FIN VALIDACIÓN PARA PASSWORD ----------//
+
+        //---------------- GENERADOR DE CONTRASEÑAS --------------//
+        const {clsBtnGenerator, clsInputGenerator} = principalMethod.password;
+        if(clsBtnGenerator && clsInputGenerator){
+            const getBtnGenPass = document.querySelector(`${clsBtnGenerator}`);            
+            const getInputGenPass = document.querySelector(`${clsInputGenerator}`);
+            getBtnGenPass && getBtnGenPass.addEventListener('click', ()=>{
+                const getGenPass = generatePassword();
+                getInputGenPass && (getInputGenPass.value = getGenPass);
+                getInputGenPass.focus();
+                getInputGenPass.blur();
+            });
+        }
+        //--------------- FIN GENERADOR DE CONTRASEÑAS ------------//
+
+        //-------------- MOSTRAR OCULTAR CONTRASEÑA --------------//
+        const { clsShowHiddePass } = principalMethod.password;
+        if(clsShowHiddePass){
+            const getBtnShowHiddenPass = document.querySelectorAll(`${clsShowHiddePass}`);
+            getBtnShowHiddenPass && getBtnShowHiddenPass.forEach((data)=>{
+                data.addEventListener('click', ()=>{
+                    const getParentPass = data.closest('.JVform__ctn-input');
+                    const getChildInput = getParentPass.querySelector('input');
+                    data.classList.toggle('active');
+                    if(getChildInput.type == 'password'){
+                        getChildInput && getChildInput.setAttribute('type', 'text');
+                    }else{
+                        getChildInput && getChildInput.setAttribute('type', 'password');
+                    }
+                });
+            });
+        }
+        //------------ FIN MOSTRAR OCULTAR CONTRASEÑA -----------//
 
         //---------------- VALIDACIÓN PARA SELECTS ---------------//
         getAllSelects && getAllSelects.forEach((data)=>{

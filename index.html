@@ -76,18 +76,24 @@
             <input type="email" name="email" id="email" data-validation="email">
           </div>
         </div>
-        <!-- PASSWORD CONFIRM -->
+        <!-- CONFIRMAR CONTRASEÑA -->
         <div class="block-input">
           <div class="ctm-block">
             <h4>Campo obligatorio + expresión regular de password y confirmación de contraseña</h4>
           </div>
           <label for="contraseña">Contraseña *</label>
-          <div class="JVform__ctn-input" style="margin-bottom:20px !important">
+          <div class="JVform__ctn-input" style="margin-bottom:20px">
             <input type="password" name="contraseña" id="contraseña" data-validation="password" data-error="Ingrese mínimo 1 minúscula, 1 mayúscula, 1 número, 1 caracters especial y sin espacios">
+            <p class="showHiddenPass">MOSTRAR/OCULTAR</p>
+            <a class="ctm-block btn" id="generatePass">
+              <p style="margin-top:10px">Generar contraseña segura</p>
+            </a>
           </div>
+          <!-- GENERADOR DE CONTRASEÑAS -->
           <label for="confirmarContraseña">Confirmar contraseña *</label>
           <div class="JVform__ctn-input">
             <input type="password" name="confirmarContraseña" id="confirmarContraseña" data-error="Las contraseñas no coinciden" data-confirmpass="true" data-match="#contraseña">
+            <p class="showHiddenPass">MOSTRAR/OCULTAR</p>
           </div>
         </div>
         <!-- RADIO -->
