@@ -64,6 +64,8 @@ function JVform(clsForm, principalMethod){
                 reUseClsValidation('phone', phone);
                 //VALIDACION PARA CORREO
                 reUseClsValidation('email', email);
+                //VALIDACION PARA PASSWORD
+                reUseClsValidation('password', password);
                 //VALIDACION PARA url
                 reUseClsValidation('url', url);
             });
@@ -157,6 +159,27 @@ function JVform(clsForm, principalMethod){
             }
         });
         //---------------- FIN VALIDACIÓN PARA ARCHIVOS ---------//
+
+        //---------------- VALIDACIÓN PARA PASSWORD -----------//
+        getAllInputs && getAllInputs.forEach((data)=>{
+            const getAtrConfirmPass = data.dataset.confirmpass;
+            if(data.type == "password" && getAtrConfirmPass){
+                data.addEventListener('keyup', ()=>{
+                    const getValueConfirmPass = data.value;
+                    const getAtrMatch = data.dataset.match;
+                    const getInputPass = document.querySelector(`${getAtrMatch}`).value;
+                    const getParentPass = data.closest('.JVform__ctn-input');
+                    if(getInputPass == getValueConfirmPass){
+                        getParentPass.classList.add('validateVF');
+                        getParentPass.classList.remove('errorValidateVF');
+                    }else{
+                        getParentPass.classList.remove('validateVF');
+                        getParentPass.classList.add('errorValidateVF');
+                    }
+                });
+            }
+        });
+        //------------- FIN VALIDACIÓN PARA PASSWORD ----------//
 
         //---------------- VALIDACIÓN PARA SELECTS ---------------//
         getAllSelects && getAllSelects.forEach((data)=>{
