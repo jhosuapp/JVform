@@ -171,12 +171,14 @@ function JVform(clsForm, principalMethod){
                     const getAtrMatch = data.dataset.match;
                     const getInputPass = document.querySelector(`${getAtrMatch}`).value;
                     const getParentPass = data.closest('.JVform__ctn-input');
+                    const reUseValidate = (clsRem, clsAdd)=>{
+                        getParentPass.classList.remove(clsRem);
+                        getParentPass.classList.add(clsAdd);
+                    }
                     if(getInputPass == getValueConfirmPass){
-                        getParentPass.classList.add('validateVF');
-                        getParentPass.classList.remove('errorValidateVF');
+                        reUseValidate('errorValidateVF', 'validateVF');
                     }else{
-                        getParentPass.classList.remove('validateVF');
-                        getParentPass.classList.add('errorValidateVF');
+                        reUseValidate('validateVF', 'errorValidateVF');
                     }
                 }
                 data.addEventListener('keyup', reUseValidationPass);
@@ -185,6 +187,49 @@ function JVform(clsForm, principalMethod){
             }
         });
         //------------- FIN VALIDACIÓN PARA PASSWORD ----------//
+
+        //---------------- VALIDACIÓN PARA FECHAS ---------------//
+        getAllInputs && getAllInputs.forEach((data)=>{
+            if(data.type == "date"){
+                const getParentDate = data.closest('.JVform__ctn-input');
+                //FUNCIÓN PARA AÑADIR Y QUITAR CLASES
+                const reUseValidate = (clsRem, clsAdd)=>{
+                    getParentDate.classList.remove(clsRem);
+                    getParentDate.classList.add(clsAdd);
+                }
+                //OBTENEMOS LA FECHA ACTUAL
+                const createActualDate = new Date();
+                const getFullYear = createActualDate.getFullYear();
+                const getMonth = createActualDate.getMonth() + 1;
+                const getDay = createActualDate.getDay();
+                const allowedYear = 1900;
+                //EVENTO DEL INPUT
+                data.addEventListener('change', ()=>{
+                    //OBTENEMOS VALUE Y ATRIBUTOS
+                    const getValue = data.value;
+                    const getAtrAdult = data.dataset.adult;
+                    const createArrayWithValue = getValue.split('-');
+                    //VALIDAMOS SI TIENE EL ATRIBUTO PARA MAYORES DE EDAD
+                    if(getAtrAdult == 'true'){
+                        if(createArrayWithValue[0] < getFullYear - 18 && createArrayWithValue[0] > allowedYear){
+                            reUseValidate('errorValidateVF', 'validateVF');
+                        }else if(createArrayWithValue[0] == getFullYear - 18){
+                            createArrayWithValue[1] < getMonth ? reUseValidate('errorValidateVF', 'validateVF') : reUseValidate('validateVF', 'errorValidateVF');;
+                        }
+                        else{
+                            reUseValidate('validateVF', 'errorValidateVF');
+                        }
+                    }else{
+                        if(getValue.length == 10 && createArrayWithValue[0] > allowedYear){
+                            reUseValidate('errorValidateVF', 'validateVF');
+                        }else{
+                            reUseValidate('validateVF', 'errorValidateVF');
+                        }
+                    }
+                });
+            }
+        });
+        //--------------- FIN VALIDACIÓN PARA FECHAS -------------//
 
         //---------------- GENERADOR DE CONTRASEÑAS --------------//
         const {clsBtnGenerator, clsInputGenerator} = principalMethod.password;
@@ -223,6 +268,11 @@ function JVform(clsForm, principalMethod){
         getAllSelects && getAllSelects.forEach((data)=>{
             const getDataMandatorySelect = data.dataset.mandatory;
             const getParentSelect = data.closest('.JVform__ctn-input');
+            //FUNCIÓN PARA AÑADIR Y QUITAR CLASES
+            const reUseValidate = (clsRem, clsAdd)=>{
+                getParentSelect.classList.remove(clsRem);
+                getParentSelect.classList.add(clsAdd);
+            }
             //COMPROBAMOS SI ES OBLIGATORIO
             if(getDataMandatorySelect == 'false' || getDataMandatorySelect == false){
                 getParentSelect.classList.add('validateVF');
@@ -232,11 +282,9 @@ function JVform(clsForm, principalMethod){
                     const getValueSelect = data.value;
                     //VALIDAMOS QUE NO VUELVA A SELECCIONAR LA OPCIÓN POR DEFECTO
                     if(getFirtsChild.toLowerCase() == getValueSelect.toLowerCase()){
-                        getParentSelect.classList.remove('validateVF');
-                        getParentSelect.classList.add('errorValidateVF');
+                        reUseValidate('validateVF', 'errorValidateVF');
                     }else{
-                        getParentSelect.classList.add('validateVF');
-                        getParentSelect.classList.remove('errorValidateVF');
+                        reUseValidate('errorValidateVF', 'validateVF');
                     }
                 });
             }
