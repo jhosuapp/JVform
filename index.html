@@ -5,8 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JVform</title>
-    <script type="module" crossorigin src="/JVform/assets/index.68bfa359.js"></script>
-    <link rel="stylesheet" href="/JVform/assets/index.c47f8f7c.css">
+    <script type="module" crossorigin src="/JVform/assets/index.9e1e5529.js"></script>
+    <link rel="stylesheet" href="/JVform/assets/index.372d9987.css">
   </head>
   <body> 
 
@@ -179,6 +179,24 @@
               data-filesize="1000000" 
               data-error="Ingrese el archivo en formato pdf, png o jpg y con un peso máximo de 1MB" 
             />
+          </div>
+        </div>
+        <!-- DATE -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + expresión de fecha por defecto</h4>
+          </div>
+          <div class="JVform__ctn-input">
+            <input type="date" name="fechaNac" id="fechaNac" data-error="Ingrese una fecha valida">
+          </div>
+        </div>
+        <!-- DATE -->
+        <div class="block-input">
+          <div class="ctm-block">
+            <h4>Campo obligatorio + expresión de fecha por defecto + validación de mayor de edad</h4>
+          </div>
+          <div class="JVform__ctn-input">
+            <input type="date" name="fechaNacDos" id="fechaNacDos" data-error="Debe ser mayor de edad para poder continuar" data-adult="true">
           </div>
         </div>
         <!--TEXTAREA-->
