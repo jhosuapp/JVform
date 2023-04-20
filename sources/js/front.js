@@ -6,6 +6,8 @@
  * https://github.com/jhosuapp
  */
 
+//=====================================================================================//
+
 //IMPORTAMOS LAS EXPRESIONES Y LOS TIPOS DE VALIDACIONES
 import { ObjRegularExpresions, ObjWithTypeValidations } from './components/JVobjects';
 //IMPORTAMOS PLANTILLA PARA MENSAJES DE ERROR
@@ -14,6 +16,8 @@ import { createTemplateError } from './components/JVtemplateError';
 import { generatePassword } from './components/JVformgenpass';
 //IMPORTAMOS EL CSS
 import "../sass/main.scss";
+
+//=====================================================================================//
 
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
@@ -52,15 +56,16 @@ import "../sass/main.scss";
                 const { user, text, phone, email, password, url } = ObjRegularExpresions();
                 getAllInputs && getAllInputs.forEach((data)=>{
                     //OBTENEMOS LOS ATRIBUTOS DEL INPUT 
-                    const getAtrTypeValidation = data.dataset.validation;
-                    const getAtrExpresion = data.dataset.expresion;
-                    const getAtrMandatory = data.dataset.mandatory;
-                    const getObjWithTypeValidations = ObjWithTypeValidations();
-                    const returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation];
-                    const getParent = data.closest('.JVform__ctn-input');
-                    const atrExpresionTransform = new RegExp(getAtrExpresion);
+                    const getAtrTypeValidation = data.dataset.validation,
+                          getAtrExpresion = data.dataset.expresion,
+                          getAtrMandatory = data.dataset.mandatory,
+                          getObjWithTypeValidations = ObjWithTypeValidations(),
+                          returnTypeValidation = getObjWithTypeValidations[getAtrTypeValidation],
+                          getParent = data.closest('.JVform__ctn-input'),
+                          atrExpresionTransform = new RegExp(getAtrExpresion);
                     //CREAMOS FUNCION PARA VALIDAR EL TIPO DE ATRIBUTO Y AÑADIMOS VALIDACIÓN CON EXPRESIONES REGULARES
                     const reUseClsValidation = (typeValidation, exp)=>{
+                        //VALIDAMOS SI SE ESTA VALIDANDO CON UNA EXPRESIÓN REGULAR PERSONALIZADA
                         if(getAtrExpresion && getAtrMandatory != "false"){
                             if(atrExpresionTransform.test(data.value)){
                                 getParent.classList.add('validateVF');
@@ -68,6 +73,7 @@ import "../sass/main.scss";
                             }else{
                                 getParent.classList.remove('validateVF');
                             }
+                        //VALIDAMOS SI SE ESTÁN VALIDANDO CON LAS EXPRESIONES PREDEFINIDAS 
                         }else if(returnTypeValidation == typeValidation && getAtrMandatory != "false"){
                             if(exp.test(data.value)){
                                 getParent.classList.add('validateVF');
@@ -96,10 +102,12 @@ import "../sass/main.scss";
                 //DESESTRUCTURAMOS MENSAJE
                 const { message } = ObjRegularExpresions();
                 getAllTextareas && getAllTextareas.forEach((data)=>{
-                    const getAtrExpresionsMsg = data.dataset.expresion;
-                    const getAtrMandatoryMsg = data.dataset.mandatory;
-                    const getParentTextarea = data.closest('.JVform__ctn-input');
-                    const atrExpresionTransformMsg = new RegExp(getAtrExpresionsMsg);
+                    //VARIABLES
+                    const getAtrExpresionsMsg = data.dataset.expresion,
+                          getAtrMandatoryMsg = data.dataset.mandatory,
+                          getParentTextarea = data.closest('.JVform__ctn-input'),
+                          atrExpresionTransformMsg = new RegExp(getAtrExpresionsMsg);
+                    //VALIDAMOS SI ES UNA EXPRESION REGULAR PERSONALIZADA
                     if(getAtrExpresionsMsg && getAtrMandatoryMsg != "false"){
                         if(atrExpresionTransformMsg.test(data.value)){
                             getParentTextarea.classList.add('validateVF');
@@ -107,6 +115,7 @@ import "../sass/main.scss";
                         }else{
                             getParentTextarea.classList.remove('validateVF');
                         }
+                    //VALIDAMOS SI ES UNA EXPRESION REGULAR PREDEFINIDA
                     }else if(getAtrMandatoryMsg != "false"){
                         if(message.test(data.value)){
                             getParentTextarea.classList.add('validateVF');
@@ -137,6 +146,7 @@ import "../sass/main.scss";
             getAllInputs && getAllInputs.forEach((data)=>{
                 if(data.type == 'file'){
                     data.addEventListener('change', ()=>{
+                        //INICIZALIZAMOS LAS VARIABLES
                         let getSizeFile, getNameFile, getAtrLimitSize, getAtrAllowdedDocs, getParentFile, nameFileToArr, getExtensionOfArr;
                         //VALIDAMOS QUE EL ARCHIVO SI EXISTA PARA EVITAR ERRORES DE CONSOLA
                         if(data.files[0]){
@@ -184,10 +194,10 @@ import "../sass/main.scss";
                 const getAtrConfirmPass = data.dataset.confirmpass;
                 if(data.type == "password" && getAtrConfirmPass){
                     const reUseValidationPass = ()=>{
-                        const getValueConfirmPass = data.value;
-                        const getAtrMatch = data.dataset.match;
-                        const getInputPass = document.querySelector(`${getAtrMatch}`).value;
-                        const getParentPass = data.closest('.JVform__ctn-input');
+                        const getValueConfirmPass = data.value,
+                              getAtrMatch = data.dataset.match,
+                              getInputPass = document.querySelector(`${getAtrMatch}`).value,
+                              getParentPass = data.closest('.JVform__ctn-input');
                         const reUseValidate = (clsRem, clsAdd)=>{
                             getParentPass.classList.remove(clsRem);
                             getParentPass.classList.add(clsAdd);
@@ -215,17 +225,16 @@ import "../sass/main.scss";
                         getParentDate.classList.add(clsAdd);
                     }
                     //OBTENEMOS LA FECHA ACTUAL
-                    const createActualDate = new Date();
-                    const getFullYear = createActualDate.getFullYear();
-                    const getMonth = createActualDate.getMonth() + 1;
-                    const getDay = createActualDate.getDay();
-                    const allowedYear = 1900;
+                    const createActualDate = new Date(),
+                          getFullYear = createActualDate.getFullYear(),
+                          getMonth = createActualDate.getMonth() + 1,
+                          allowedYear = 1900;
                     //EVENTO DEL INPUT
                     data.addEventListener('change', ()=>{
                         //OBTENEMOS VALUE Y ATRIBUTOS
-                        const getValue = data.value;
-                        const getAtrAdult = data.dataset.adult;
-                        const createArrayWithValue = getValue.split('-');
+                        const getValue = data.value,
+                              getAtrAdult = data.dataset.adult,
+                              createArrayWithValue = getValue.split('-');
                         //VALIDAMOS SI TIENE EL ATRIBUTO PARA MAYORES DE EDAD
                         if(getAtrAdult == 'true'){
                             if(createArrayWithValue[0] < getFullYear - 18 && createArrayWithValue[0] > allowedYear){
@@ -251,8 +260,8 @@ import "../sass/main.scss";
             //---------------- GENERADOR DE CONTRASEÑAS --------------//
             const {clsBtnGenerator, clsInputGenerator} = options.password;
             if(clsBtnGenerator && clsInputGenerator){
-                const getBtnGenPass = document.querySelector(`${clsBtnGenerator}`);            
-                const getInputGenPass = document.querySelector(`${clsInputGenerator}`);
+                const getBtnGenPass = document.querySelector(`${clsBtnGenerator}`),        
+                      getInputGenPass = document.querySelector(`${clsInputGenerator}`);
                 getBtnGenPass && getBtnGenPass.addEventListener('click', ()=>{
                     const getGenPass = generatePassword();
                     getInputGenPass && (getInputGenPass.value = getGenPass);
@@ -283,8 +292,8 @@ import "../sass/main.scss";
     
             //---------------- VALIDACIÓN PARA SELECTS ---------------//
             getAllSelects && getAllSelects.forEach((data)=>{
-                const getDataMandatorySelect = data.dataset.mandatory;
-                const getParentSelect = data.closest('.JVform__ctn-input');
+                const getDataMandatorySelect = data.dataset.mandatory,
+                      getParentSelect = data.closest('.JVform__ctn-input');
                 //FUNCIÓN PARA AÑADIR Y QUITAR CLASES
                 const reUseValidate = (clsRem, clsAdd)=>{
                     getParentSelect.classList.remove(clsRem);
@@ -341,9 +350,9 @@ import "../sass/main.scss";
             //---------------- ENVÍO DEL FORMULARIO --------------------//
             //VALIDACION DE CONDICIONES EN SUBMIT Y ENVIO DEL FORM
             getEventSubmit.addEventListener('submit', (e)=>{
-                const getAllClsValidate = document.querySelectorAll(`${selector} .validateVF`);
-                const getAllClsInputCtn = document.querySelectorAll(`${selector} .JVform__ctn-input`);
-                const getMessageError = document.querySelector(`${selector} .JVform__error-send`);
+                const getAllClsValidate = document.querySelectorAll(`${selector} .validateVF`),
+                      getAllClsInputCtn = document.querySelectorAll(`${selector} .JVform__ctn-input`),
+                      getMessageError = document.querySelector(`${selector} .JVform__error-send`);
                 //FUNCIÓN PARA AÑADIR Y QUITAR CLASE QUE VALIDA
                 const reUseAssignementCls = (clsValidation)=>{
                     clsValidation.forEach((data)=>{
